@@ -16,3 +16,19 @@
 - Datas e horários devem preservar o fuso informado e as respostas de abertura devem utilizar ISO-8601 com fuso `-03:00`.
 - A API não deve inventar comportamentos para situações que possuem erro explicitamente definido no contrato.
 - Erros devem possuir o código HTTP e o corpo JSON exatamente conforme `spec.md`.
+
+# 3. Contrato HTTP
+
+| Método | Rota | Sucesso | Erros |
+|---|---|---|---|
+| `[POST]` | `/bilhetes ` | `201` | `422`, `409`|
+| `[GET]` | `/bilhetes/{id}/encerramento` | `200` | 
+| `[GET]` | `/bilhetes/ativos` | `200` | 
+| `[GET]` | `/relatorios/diario?data=AAAA-MM-DD` | `200` |
+| `[GET]` | `/bilhetes?placa=ABC1D23` | `200` | 
+| `[DELETE]` | `/...` | `[STATUS]` | `[STATUS]` |
+
+Os métodos, rotas, campos e códigos HTTP definidos no contrato
+devem ser preservados.
+
+
