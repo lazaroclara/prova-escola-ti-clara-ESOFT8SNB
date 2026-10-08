@@ -2,9 +2,9 @@
 
 # ALUNO
 
-Nome: lazaroclara
+Nome: Ana Clara Paim Lázaro
 
-RA: >>> PREENCHER <<<
+RA: 230874812
 
 Conta GitHub: @lazaroclara
 
