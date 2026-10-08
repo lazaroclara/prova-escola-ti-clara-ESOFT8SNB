@@ -29,12 +29,19 @@ POST /bilhetes/{id}/encerramento → 200:
 {"id": 1, "placa": "ABC1D23", "entrada": "...", "saida": "...",
  "minutos": 95, "valor_centavos": 1250}
 
-Regras de valor:
-
+# Regras
 - Cobra-se por fração de FRACAO_MINUTOS minutos, arredondando para cima (fração exata cobra 1 fração; 1 minuto a mais já cobra a fração seguinte);
 - hora cheia = TARIFA_HORA_CENTAVOS; valor da fração = tarifa ÷ (60 ÷ FRACAO_MINUTOS);
 - aplica-se o teto diário: valor_centavos nunca supera TETO_DIARIO_CENTAVOS;
 - valor sempre em centavos, inteiro — a API nunca retorna ponto flutuante.[^por-que-centavos]
+- Bilhete inexistente gera status: `409`.
+- Apenas bilhete aberto pode ser encerrado. 
+- A duração deve ser indicada em minutos inteiros, nunca fracionados. Caso seja um valor fracionado, sempre arredondar para cima. 
+- A duração em minutos é calculada entre `entrada` e `saida`.
+- A duração deve ser representada em minutos inteiros conforme o instante de entrada e saída.
+- A cobrança deve usar as regras da seção 7.
+- O valor deve ser inteiro em centavos.
+- O valor final nunca pode superar `TETO_DIARIO_CENTAVOS`.
 
 # UC3 — Listar ativos
 GET /bilhetes/ativos → 200 com array dos bilhetes abertos, mais recentes primeiro.
