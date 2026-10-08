@@ -9,3 +9,10 @@
 - A tolerância tem os minutos iniciais grátis por bilhete (0, 10 ou 15). Passada a tolerância, é cobrado desde o primeiro minuto. 
 - O teto diário é obrigatório, o valor cobrado por um bilhete nunca pode ultrapassar `TETO_DIARIO_CENTAVOS`.
 - Apenas os bilhetes com status `aberto` podem ser cancelados sem cobrança, não gerando `saida` ou `valor_centavos`.
+- O `tempo_medio_minutos` considera apenas bilhetes encerrados no dia, arredondando 0,5 para cima.
+- Os primeiros `TOLERANCIA_MINUTOS` de um bilhete são grátis. Quando suração é menor ou igual a tolerância, `valor_centavos`: 0. Passou da tolerância (mesmo por 1 minuto): cobra integral desde o primeiro minuto. A tolerância não é descontada.
+- Não é possível abrir um bilhete para uma placa que já possui bilhete `aberto`. Após encerrrar ou cancelar, a placa volta a poder abrir.
+- A placa deve possuir 7 caracteres alfanuméricos, maiúsculos, na sequência de: 3 letras, 1 número, 1 letra, 2 números.
+- Datas e horários devem preservar o fuso informado e as respostas de abertura devem utilizar ISO-8601 com fuso `-03:00`.
+- A API não deve inventar comportamentos para situações que possuem erro explicitamente definido no contrato.
+- Erros devem possuir o código HTTP e o corpo JSON exatamente conforme `spec.md`.
