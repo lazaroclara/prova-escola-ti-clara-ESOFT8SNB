@@ -31,4 +31,11 @@
 Os métodos, rotas, campos e códigos HTTP definidos no contrato
 devem ser preservados.
 
+# 4. Princípios obrigatórios
+- Não inventar campos, rotas ou status.
+- Em nenhuma hipótese alterar regras definidas no contrato.
+- Não produzir efeitos colaterais em operações rejeitadas.
+- Todas as regras críticas devem ser verificáveis por testes.
+- Toda a aplicação roda dentro de um container, nada depende de instalação na máquina host.
+
 
