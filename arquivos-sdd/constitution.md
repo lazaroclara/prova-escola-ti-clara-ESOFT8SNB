@@ -38,4 +38,18 @@ devem ser preservados.
 - Todas as regras críticas devem ser verificáveis por testes.
 - Toda a aplicação roda dentro de um container, nada depende de instalação na máquina host.
 
+# 5. Stack e Linguagem 
+- Linguagem: Python 3.12
+- Framework HTTP: FastAPI
+- Servidor ASGI: Uvicorn
+- Validação: Pydantic v2 (vem com FastAPI)
+- Testes: pytest + httpx (TestClient)
+
+# 6. Encapsulamento de componentes 
+- config - Centraliza os parâmetros da variante
+- schemas - Valida DTOs (placa, ISO-8601, data), não conhece: regras de valor, persistência
+- router - HTTP ⇄ domínio + mapeia erro → status code, não conhece: como se calcula valor
+- service: Todas as regras (fração, teto, tolerância, 1-vaga), não conhece: HTTP / JSON
+- repository - Guarda e busca bilhetes em memória, não conehce: regras de negócio
+
 
