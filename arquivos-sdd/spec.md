@@ -29,7 +29,7 @@ POST /bilhetes/{id}/encerramento → 200:
 {"id": 1, "placa": "ABC1D23", "entrada": "...", "saida": "...",
  "minutos": 95, "valor_centavos": 1250}
 
-# Regras
+## Regras
 - Cobra-se por fração de FRACAO_MINUTOS minutos, arredondando para cima (fração exata cobra 1 fração; 1 minuto a mais já cobra a fração seguinte);
 - hora cheia = TARIFA_HORA_CENTAVOS; valor da fração = tarifa ÷ (60 ÷ FRACAO_MINUTOS);
 - aplica-se o teto diário: valor_centavos nunca supera TETO_DIARIO_CENTAVOS;
@@ -43,8 +43,23 @@ POST /bilhetes/{id}/encerramento → 200:
 - O valor deve ser inteiro em centavos.
 - O valor final nunca pode superar `TETO_DIARIO_CENTAVOS`.
 
+## Critérios de Aceite 
+- Encerrar um bilhete aberto retorna `200`.
+- A resposta contém `id`, `placa`, `entrada`, `saida`, `minutos` e `valor_centavos`.
+- O status deixa de ser `aberto`.
+- Encerrar novamente o mesmo bilhete retorna `409` com `{"erro":"bilhete_ja_encerrado"}`.
+- Bilhete inexistente retorna `404` com `{"erro":"bilhete_nao_encontrado"}`.
+- O valor nunca excede o teto.
+
 # UC3 — Listar ativos
 GET /bilhetes/ativos → 200 com array dos bilhetes abertos, mais recentes primeiro.
+
+## Critérios de aceite
+- Bilhetes encerrados não aparecem.
+- Bilhetes cancelados não aparecem.
+- Bilhetes abertos aparecem.
+- A ordenação é decrescente por abertura/recência.
+- Sem bilhetes ativos, retorna `[]`.
 
 # UC4 — Relatório diário
 GET /relatorios/diario?data=AAAA-MM-DD → 200:
